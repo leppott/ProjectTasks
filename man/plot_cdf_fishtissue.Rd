@@ -43,75 +43,73 @@ plot_cdf_fishtissue(
 )
 }
 \arguments{
-\item{fun.DF}{x}
+\item{fun.DF}{Data data frame}
 
-\item{fun.Main}{x}
+\item{fun.Main}{plot(main)}
 
-\item{fun.xlim.x}{x}
+\item{fun.xlim.x}{plot(xlim), value 1}
 
-\item{fun.xlim.y}{x}
+\item{fun.xlim.y}{plot(xlim), value 2}
 
-\item{fun.xlab}{x}
+\item{fun.xlab}{plot(xlab)}
 
-\item{fun.ylab}{x}
+\item{fun.ylab}{plot(ylab)}
 
-\item{fun.axis.4.at}{x}
+\item{fun.axis.4.at}{axis 4 (right), at}
 
-\item{fun.axis.4.labels}{x}
+\item{fun.axis.4.labels}{axis 4 (right), labels}
 
-\item{fun.axis.4.mtext}{x}
+\item{fun.axis.4.mtext}{axis 4 (right), margin text label}
 
-\item{fun.SV.plot}{x}
+\item{fun.SV.plot}{Screening Value 1, boolean value to plot SV}
 
-\item{fun.SV}{x}
+\item{fun.SV}{Screening Value 1, numeric value}
 
-\item{fun.SV.int}{x}
+\item{fun.SV.int}{Screening Value 1, y-intercept value}
 
-\item{fun.SV.lab}{x}
+\item{fun.SV.lab}{Screening Value 1, legend (source)}
 
-\item{fun.SV2.plot}{x}
+\item{fun.SV2.plot}{Screening Value 2, boolean value to plot SV}
 
-\item{fun.SV2}{x}
+\item{fun.SV2}{Screening Value 2, numeric value}
 
-\item{fun.SV2.int}{x}
+\item{fun.SV2.int}{Screening Value 2, y-intercept value}
 
-\item{fun.SV2.lab}{x}
+\item{fun.SV2.lab}{Screening Value 2, legend (source)}
 
-\item{fun.SV3.plot}{x}
+\item{fun.SV3.plot}{Screening Value 3, boolean value to plot SV}
 
-\item{fun.SV3}{x}
+\item{fun.SV3}{Screening Value 3, numeric value}
 
-\item{fun.SV3.int}{x}
+\item{fun.SV3.int}{Screening Value 3, y-intercept value}
 
-\item{fun.SV3.lab}{x}
+\item{fun.SV3.lab}{Screening Value 3, legend (source)}
 
-\item{fun.SV4.plot}{x}
+\item{fun.SV4.plot}{Screening Value 4, boolean value to plot SV}
 
-\item{fun.SV4}{x}
+\item{fun.SV4}{Screening Value 4, numeric value}
 
-\item{fun.SV4.int}{x}
+\item{fun.SV4.int}{Screening Value 4, y-intercept value}
 
-\item{fun.SV4.lab}{x}
+\item{fun.SV4.lab}{Screening Value 4, legend (source)}
 
-\item{fun.break.boo}{x}
+\item{fun.break.boo}{Should x-axis include a break. Default = FALSE}
 
-\item{fun.break.max.at}{x}
+\item{fun.break.max.at}{. Default = NA}
 
-\item{fun.break.max.text}{x}
+\item{fun.break.pos}{location of break. Default = NA}
 
-\item{fun.break.pos}{x}
+\item{fun.break.axis.at}{break. Default = NA}
 
-\item{fun.break.axis.at}{x}
+\item{fun.break.axis.labels}{new x-axis labels with break}
 
-\item{fun.break.axis.labels}{x}
+\item{leg_SV_str}{Legend screening value, SV text.  Default = "Screening Value"}
 
-\item{leg_SV_str}{x}
+\item{leg_SV_units}{Legend screening value, units.  Default = NA}
 
-\item{leg_SV_units}{x}
+\item{fun.axis.2.mtext}{axis 2 (left) margin text label. Default = NA}
 
-\item{fun.axis.2.mtext}{x}
-
-\item{fun.xlog}{x}
+\item{boo_log10_x}{Boolean value if x-axis should be log10 transformed.  Default = FALSE}
 }
 \value{
 
@@ -138,6 +136,8 @@ uses the Hmisc and plotrix packages
 # 20210826, Add legend label update
 # 20220322, Legend, "Data" to "Fillet Concentration Data"
 # 20220414, move to package scripts, was fun.plot.CDF.fish
+
+# Derived from NRSA version (more advanced with Log scale than GL version)
 }
 \examples{
 

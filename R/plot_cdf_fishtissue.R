@@ -21,41 +21,42 @@
 #' # 20220322, Legend, "Data" to "Fillet Concentration Data"
 #' # 20220414, move to package scripts, was fun.plot.CDF.fish
 #'
-#' @param fun.DF x
-#' @param fun.Main x
-#' @param fun.xlim.x x
-#' @param fun.xlim.y x
-#' @param fun.xlab x
-#' @param fun.ylab x
-#' @param fun.axis.4.at x
-#' @param fun.axis.4.labels x
-#' @param fun.axis.4.mtext x
-#' @param fun.SV.plot x
-#' @param fun.SV x
-#' @param fun.SV.int x
-#' @param fun.SV.lab x
-#' @param fun.SV2.plot x
-#' @param fun.SV2 x
-#' @param fun.SV2.int x
-#' @param fun.SV2.lab x
-#' @param fun.SV3.plot x
-#' @param fun.SV3 x
-#' @param fun.SV3.int x
-#' @param fun.SV3.lab x
-#' @param fun.SV4.plot x
-#' @param fun.SV4 x
-#' @param fun.SV4.int x
-#' @param fun.SV4.lab x
-#' @param fun.break.boo x
-#' @param fun.break.max.at x
-#' @param fun.break.max.text x
-#' @param fun.break.pos x
-#' @param fun.break.axis.at x
-#' @param fun.break.axis.labels x
-#' @param leg_SV_str x
-#' @param leg_SV_units x
-#' @param fun.axis.2.mtext x
-#' @param fun.xlog x
+#' # Derived from NRSA version (more advanced with Log scale than GL version)
+#'
+#' @param fun.DF Data data frame
+#' @param fun.Main plot(main)
+#' @param fun.xlim.x plot(xlim), value 1
+#' @param fun.xlim.y plot(xlim), value 2
+#' @param fun.xlab plot(xlab)
+#' @param fun.ylab plot(ylab)
+#' @param fun.axis.4.at axis 4 (right), at
+#' @param fun.axis.4.labels axis 4 (right), labels
+#' @param fun.axis.4.mtext axis 4 (right), margin text label
+#' @param fun.SV.plot Screening Value 1, boolean value to plot SV
+#' @param fun.SV Screening Value 1, numeric value
+#' @param fun.SV.int Screening Value 1, y-intercept value
+#' @param fun.SV.lab Screening Value 1, legend (source)
+#' @param fun.SV2.plot Screening Value 2, boolean value to plot SV
+#' @param fun.SV2 Screening Value 2, numeric value
+#' @param fun.SV2.int Screening Value 2, y-intercept value
+#' @param fun.SV2.lab Screening Value 2, legend (source)
+#' @param fun.SV3.plot Screening Value 3, boolean value to plot SV
+#' @param fun.SV3 Screening Value 3, numeric value
+#' @param fun.SV3.int Screening Value 3, y-intercept value
+#' @param fun.SV3.lab Screening Value 3, legend (source)
+#' @param fun.SV4.plot Screening Value 4, boolean value to plot SV
+#' @param fun.SV4 Screening Value 4, numeric value
+#' @param fun.SV4.int Screening Value 4, y-intercept value
+#' @param fun.SV4.lab Screening Value 4, legend (source)
+#' @param fun.break.boo Should x-axis include a break. Default = FALSE
+#' @param fun.break.max.at . Default = NA
+#' @param fun.break.pos location of break. Default = NA
+#' @param fun.break.axis.at break. Default = NA
+#' @param fun.break.axis.labels new x-axis labels with break
+#' @param leg_SV_str Legend screening value, SV text.  Default = "Screening Value"
+#' @param leg_SV_units Legend screening value, units.  Default = NA
+#' @param fun.axis.2.mtext axis 2 (left) margin text label. Default = NA
+#' @param boo_log10_x Boolean value if x-axis should be log10 transformed.  Default = FALSE
 #'
 #' @return
 #'
@@ -97,8 +98,9 @@ plot_cdf_fishtissue <- function(fun.DF
                                 , leg_SV_units = NA
                                 , fun.axis.2.mtext = NA
                                 , fun.xlog = FALSE
-) { ## FUNCTION.START
-  # define some values
+                                ) {
+  #browser()
+  # define some values ----
   lwd.data <- 2.5
   lwd.SV <- 1.5
   lwd.CI <- lwd.SV
@@ -117,105 +119,197 @@ plot_cdf_fishtissue <- function(fun.DF
   par(oma=c(0,0,0,3))
   par(xaxs="i",yaxs="i",cex.main=1.4,cex.lab=1.2)
   #
-  # Plot without axes
-  # (so can manipulate for BREAK)
+
+  #  browser()
+  # log10_x, mod data ----
+  if(boo_log10_x == TRUE) {
+    # Munge data for plot
+    #fun.DF$Value <- log10(fun.DF$Value)
+    # SV segments values
+    # SV.val.seg <- log10(fun.SV)
+    # SV2.val.seg <- log10(fun.SV2)
+    # SV3.val.seg <- log10(fun.SV3)
+    # SV4.val.seg <- log10(fun.SV4)
+    seg.h.x0 <- 0.001
+    seg.v.y0 <- -10
+  } else {
+    # SV.val.seg <- fun.SV
+    # SV2.val.seg <- fun.SV2
+    # SV3.val.seg <- fun.SV3
+    # SV4.val.seg <- fun.SV4
+    seg.h.x0 <- 0
+    seg.v.y0 <- 0
+  }## IF ~ boo_log10_x
+
+  # Segment values
+  SV.val.seg <- fun.SV
+  SV2.val.seg <- fun.SV2
+  SV3.val.seg <- fun.SV3
+  SV4.val.seg <- fun.SV4
+
+  # Legend SV value
+  SV.val.leg <- fun.SV
+  SV2.val.leg <- fun.SV2
+  SV3.val.leg <- fun.SV3
+  SV4.val.leg <- fun.SV4
+
+
+  # Plot ----
+  # without axes so can manipulate for BREAK
   if(fun.break.boo==TRUE){##IF.fun.break.boo.START
+    ## plot, break, TRUE ----
     plot(fun.DF$Estimate.P~sort(fun.DF$Value)
          , ylim=c(0,101)
          , xlim=c(fun.xlim.x,1.01*(fun.break.max.at))
-         , type="l"
-         , col=col.data
-         , lwd=lwd.data
-         , lty=lty.data
-         , main=fun.Main
-         , xlab=fun.xlab
-         , ylab=fun.ylab
-         , axes=FALSE)
+         , type="l", col=col.data, lwd=lwd.data, lty=lty.data
+         , main=fun.Main, xlab=fun.xlab, ylab=fun.ylab, axes=FALSE)
     #
     grid(col="lightgray",lty="dotted",lwd=0.5)
     box()
     axis(1,at=fun.break.axis.at,label=fun.break.axis.labels)
     axis.break(1,fun.break.pos,style="zigzag")
   } else {
-    if(fun.xlog == TRUE) {
+    ## plot, break, FALSE ----
+    if(boo_log10_x == TRUE) {
+      ## plot, log10----
       plot(fun.DF$Estimate.P~sort(fun.DF$Value)
            , ylim=c(0,101)
            #, xlim=c(fun.xlim.x,1.01*(fun.xlim.y))
-           , type="l"
-           , col=col.data
-           , lwd=lwd.data
-           , lty=lty.data
-           , main=fun.Main
-           , xlab=fun.xlab
-           , ylab=fun.ylab
-           , axes=FALSE
+           , type="l", col=col.data, lwd=lwd.data, lty=lty.data
+           , main=fun.Main, xlab=fun.xlab, ylab=fun.ylab, axes=FALSE
            , log = "x")
+      ### Axis 1 (bottom) ----
+      # idea
+      # https://stackoverflow.com/questions/6897243/labelling-logarithmic-scale-display-in-r
+      axis_log10_at <- outer(c((1:9)/100, (1:9)/10, 1:9), 10^(0:4))
+      axis_log10_lab <- ifelse(log10(axis_log10_at) %% 1 == 0, axis_log10_at, NA)
+      # Ticks, Minor
+      axis(1, at = axis_log10_at, labels = axis_log10_lab, tck = -0.01)
+      # Ticks, Major
+      axis(1, at = axis_log10_lab, labels = NA, tck = -0.025)
     } else {
+      # plot, base ----
       plot(fun.DF$Estimate.P~sort(fun.DF$Value)
            , ylim=c(0,101)
            , xlim=c(fun.xlim.x,1.01*(fun.xlim.y))
-           , type="l"
-           , col=col.data
-           , lwd=lwd.data
-           , lty=lty.data
-           , main=fun.Main
-           , xlab=fun.xlab
-           , ylab=fun.ylab
-           , axes=FALSE)
-    }## IF ~ fun.xlog
-
+           , type="l", col=col.data, lwd=lwd.data, lty=lty.data
+           , main=fun.Main, xlab=fun.xlab, ylab=fun.ylab, axes=FALSE)
+      ### Axis 1 (bottom) ----
+      axis(1)
+    }## IF ~ boo_log10_x ~ 2
     grid(col="lightgray",lty="dotted",lwd=0.5)
-    axis(1)
     box()
   }##IF.fun.break.boo.START
+
+  # # Log X
+  # plot(fun.DF$Estimate.P~sort(fun.DF$Value)
+  #      , ylim=c(0,101), log = "x"
+  #      , type="l", col=col.data, lwd=lwd.data, lty=lty.data
+  #      , main=fun.Main, xlab=fun.xlab, ylab=fun.ylab, axes=FALSE)
+  # grid(col="lightgray",lty="dotted",lwd=0.5)
+  # xlog_ticks_at <- axTicks(1)
+  # # xlog_ticks_lab <- sapply(xlog_ticks_at, function(i)
+  # #                         as.expression(bquote(10^ .(i)))
+  # #                         )
+  # xlog_ticks_lab <- format(xlog_ticks_at, scientific = FALSE, trim = TRUE)
+  # axis(1, at = xlog_ticks_at, labels = xlog_ticks_lab)
   #
-  # add axis 2 (moved grid and box inside IF/THEN)
+  ## used log="x" inside plot() so above not needed.
+
+  box() # covers up grid lines
+
+  # (moved grid and box inside IF/THEN)
+
+  # Axis 2 (left) ----
   axis(2)
-  #
-  # Screening Value Lines (vertical & horizontal)
+  # Add minor tickmarks (1 = no tick, ratio = compared to major ticks)
+  Hmisc::minor.tick(nx=1,ny=4,tick.ratio=0.33)
+
+  # Axis 4 (right) ----
+  axis(4,at=fun.axis.4.at,labels=fun.axis.4.labels)
+
+  # 95% confidence intervals ----
+  lines(fun.DF$UCB95Pct.P~sort(fun.DF$Value),col=col.CI,lty=lty.CI,lwd=lwd.CI)
+  lines(fun.DF$LCB95Pct.P~sort(fun.DF$Value),col=col.CI,lty=lty.CI,lwd=lwd.CI)
+
+  # Screening Value Lines (vertical & horizontal) ----
   mySV.num <- 0
+  #seg.x0 defined under log10_x
   # SV1 - 20110713, add back in, only plot if "fun.SV.plot=TRUE".
-  if(fun.SV.plot==TRUE) {
+  if(fun.SV.plot == TRUE) { ## IF.START
     mySV.num <- 1
-    segments(fun.SV,0,fun.SV,fun.SV.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    if(fun.xlog == TRUE) {
-      segments(.1,fun.SV.int,fun.SV,fun.SV.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    } else {
-      segments(0,fun.SV.int,fun.SV,fun.SV.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    }## IF ~ fun.xlog ~ SV1
-  } ## IF ~ SV1
+    segments(SV.val.seg
+             , seg.v.y0
+             , SV.val.seg
+             , fun.SV.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+    segments(seg.h.x0
+             , fun.SV.int
+             , SV.val.seg
+             , fun.SV.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+  } ## IF.END
   # SV2 - 20161004, extra SV plot
-  if(SV2.plot==TRUE) {
+  if(SV2.plot==TRUE) { ## IF.START
     mySV.num <- 2
-    segments(fun.SV2,0,fun.SV2,fun.SV2.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    if(fun.xlog == TRUE) {
-      segments(.1,fun.SV2.int,fun.SV2,fun.SV2.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    } else {
-      segments(0,fun.SV2.int,fun.SV2,fun.SV2.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    }## IF ~ fun.xlog ~ SV2
-  } ## IF ~ SV2
+    segments(SV2.val.seg
+             , seg.v.y0
+             , SV2.val.seg
+             , fun.SV2.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+    segments(seg.h.x0
+             , fun.SV2.int
+             , SV2.val.seg
+             , fun.SV2.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+  } ## IF.END
   # SV3 - 20161006, extra SV plot
-  if(SV3.plot==TRUE) {
+  if(SV3.plot == TRUE) { ## IF.START
     mySV.num <- 3
-    segments(fun.SV3,0,fun.SV3,fun.SV3.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    if(fun.xlog == TRUE) {
-      segments(.1,fun.SV3.int,fun.SV3,fun.SV3.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    } else {
-      segments(0,fun.SV3.int,fun.SV3,fun.SV3.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    }## IF ~ fun.xlog ~ SV3
-  } ## IF ~ SV3
+    segments(SV3.val.seg
+             , seg.v.y0
+             , SV3.val.seg
+             , fun.SV3.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+    segments(seg.h.x0
+             , fun.SV3.int
+             , SV3.val.seg
+             , fun.SV3.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+  } ## IF.END
   # SV4 - 20161006, extra SV plot
-  if(SV4.plot==TRUE) {
+  if(SV4.plot == TRUE) { ## IF.START
     mySV.num <- 4
-    segments(fun.SV4,0,fun.SV4,fun.SV4.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    if(fun.xlog == TRUE) {
-      segments(.1,fun.SV4.int,fun.SV4,fun.SV4.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    } else {
-      segments(0,fun.SV4.int,fun.SV4,fun.SV4.int,col=col.SV,lwd=lwd.SV,lty=lty.SV)
-    }## IF ~ fun.xlog ~ SV4
-  } ## IF ~ SV4
+    segments(SV4.val.seg
+             , seg.v.y0
+             , SV4.val.seg
+             , fun.SV4.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+    segments(seg.h.x0
+             , fun.SV4.int
+             , SV4.val.seg
+             , fun.SV4.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+  } ## IF.END
   #
-  # Legend (EWL, 20120830, added SV legend back (inside of SV IF/THEN)
+  # Legend ----
+  # (EWL, 20120830, added SV legend back (inside of SV IF/THEN)
   # highest number will take priority
   # 20200401, add variable for legend text and units
 
@@ -287,23 +381,14 @@ plot_cdf_fishtissue <- function(fun.DF
   }
 
   #~~~~~~~~~~~~~~~~~~~~~~~~
+  # Break Symbol ----
   # Break (after legend so goes on top)
   if(fun.break.boo==TRUE){##IF.fun.break.boo.START
     plotrix::axis.break(1,fun.break.pos,style="zigzag")
   }
-  #
-  #~~~~~~~~~~~~~~~~~~~~~~~~
-  # 95% confidence intervals
-  lines(fun.DF$UCB95Pct.P~sort(fun.DF$Value),col=col.CI,lty=lty.CI,lwd=lwd.CI)
-  lines(fun.DF$LCB95Pct.P~sort(fun.DF$Value),col=col.CI,lty=lty.CI,lwd=lwd.CI)
 
-  # Axis 4 (right)
-  axis(4,at=fun.axis.4.at,labels=fun.axis.4.labels)
-  axis(2)
-  # Add minor tickmarks (1 = no tick, ratio = compared to major ticks)
-  minor.tick(nx=1,ny=4,tick.ratio=0.33)
-  par(new=T)
-  #
+  # Axis 2 and 4 Titles ----
+  par(new=TRUE)
   # different title based on projet (20161004)
   mtext(fun.axis.4.mtext, side = 4, line = mtext.line, cex = mtext.cex)
   # different yaxis (20210827), when use superscript have to use mtext instead
@@ -311,6 +396,6 @@ plot_cdf_fishtissue <- function(fun.DF
     mtext(fun.axis.2.mtext, side = 2, line = mtext.line - 0.5, cex = mtext.cex)
   }## IF ~ !is.na(fun.axis.2.mtext) ~ END
   #
-  # Turn off new
-  par(new=F)
-} ## FUNCTION.END
+  # Turn off new ----
+  par(new=FALSE)
+} ## FUNCTION ~ END
