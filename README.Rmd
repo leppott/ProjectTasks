@@ -1,0 +1,40 @@
+---
+title: "README_ProjectTasks"
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# ProjectTasks
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of ProjectTasks is to create a central location for functions to 
+produce plots and tables for various projects.  This will allow for the same
+quality to be generated for each project.  No more multiple versions fo the 
+same / similar script.
+
+## Installation
+
+You can install the development version of ProjectTasks like so:
+
+``` r
+if(!require(remotes)){install.packages("remotes")}  #install if needed
+install_github("leppott/ProjectTasks", force=TRUE)
+```
+
+## Current Tasks
+
+* Fish Tissue Surveys (NLA, NRSA, and Great Lakes)
+
+    + CDF plots

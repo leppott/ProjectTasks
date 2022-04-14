@@ -1,0 +1,29 @@
+---
+title: "NEWS"
+author: Erik.Leppo@tetratech.com
+output: github_document
+  #md_document:
+   # variant: markdown_github
+---
+
+<!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
+
+```{r Options, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.path = "NEWS-")
+```
+
+```{r LastUpdate, echo = FALSE}
+cat(paste0("Last Update: ",Sys.time()))
+```
+
+# ProjectTasks 0.1.0.9001 (2022-04-14)
+
+* Initial commit.
+    + NEWS.Rmd
+    + README.Rmd
+    + DESCRIPTION
+    + Library Creation helper notebook
+
+# ProjectTasks 0.1.0 (2022-04-14)
+
+* Repo created on GitHub

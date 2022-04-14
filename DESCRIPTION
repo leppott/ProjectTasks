@@ -1,0 +1,14 @@
+Package: ProjectTasks
+Type: Package
+Title: Project Plots and Tables
+Version: 0.1.0.9001
+Author: person("Erik W.", "Leppo", email="Erik.Leppo@tetratech.com", role=c("aut","cre"))
+Maintainer: Erik W. Leppo <Erik.Leppo@tetratech.com>
+Description: Package to maintain scripts for generating plots and tables across 
+    multiple projects.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/leppott/ProjectTasks
+BugReports: https://github.com/leppott/ProjectTasks/issues
+RoxygenNote: 7.1.2
