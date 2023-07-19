@@ -109,10 +109,7 @@ plot_cdf_fishtissue(
 
 \item{fun.axis.2.mtext}{axis 2 (left) margin text label. Default = NA}
 
-\item{boo_log10_x}{Boolean value if x-axis should be log10 transformed.  Default = FALSE}
-}
-\value{
-
+\item{fun.xlog}{Boolean value if x-axis should be log10 transformed.  Default = FALSE}
 }
 \description{
 CDF for fish study projects
@@ -138,7 +135,4 @@ uses the Hmisc and plotrix packages
 # 20220414, move to package scripts, was fun.plot.CDF.fish
 
 # Derived from NRSA version (more advanced with Log scale than GL version)
-}
-\examples{
-
 }

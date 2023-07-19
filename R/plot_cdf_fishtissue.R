@@ -56,7 +56,7 @@
 #' @param leg_SV_str Legend screening value, SV text.  Default = "Screening Value"
 #' @param leg_SV_units Legend screening value, units.  Default = NA
 #' @param fun.axis.2.mtext axis 2 (left) margin text label. Default = NA
-#' @param boo_log10_x Boolean value if x-axis should be log10 transformed.  Default = FALSE
+#' @param fun.xlog Boolean value if x-axis should be log10 transformed.  Default = FALSE
 #'
 #' @return
 #'
@@ -116,13 +116,13 @@ plot_cdf_fishtissue <- function(fun.DF
   plot.val.max <- max(fun.DF$Value)
   #plot.ylim.max <- 101
   #plot.xlim.min <-   # use formula based on max(fun.myDF$Value)
-  par(oma=c(0,0,0,3))
-  par(xaxs="i",yaxs="i",cex.main=1.4,cex.lab=1.2)
+  par(oma = c(0, 0, 0, 3))
+  par(xaxs = "i", yaxs = "i", cex.main = 1.4, cex.lab = 1.2)
   #
 
   #  browser()
   # log10_x, mod data ----
-  if(boo_log10_x == TRUE) {
+  if (fun.xlog == TRUE) {
     # Munge data for plot
     #fun.DF$Value <- log10(fun.DF$Value)
     # SV segments values
@@ -156,27 +156,39 @@ plot_cdf_fishtissue <- function(fun.DF
 
   # Plot ----
   # without axes so can manipulate for BREAK
-  if(fun.break.boo==TRUE){##IF.fun.break.boo.START
+  if (fun.break.boo == TRUE) {##IF.fun.break.boo.START
     ## plot, break, TRUE ----
     plot(fun.DF$Estimate.P~sort(fun.DF$Value)
-         , ylim=c(0,101)
-         , xlim=c(fun.xlim.x,1.01*(fun.break.max.at))
-         , type="l", col=col.data, lwd=lwd.data, lty=lty.data
-         , main=fun.Main, xlab=fun.xlab, ylab=fun.ylab, axes=FALSE)
+         , ylim = c(0,101)
+         , xlim = c(fun.xlim.x, 1.01 * (fun.break.max.at))
+         , type = "l"
+         , col = col.data
+         , lwd = lwd.data
+         , lty = lty.data
+         , main = fun.Main
+         , xlab = fun.xlab
+         , ylab = fun.ylab
+         , axes = FALSE)
     #
-    grid(col="lightgray",lty="dotted",lwd=0.5)
+    grid(col = "lightgray", lty = "dotted", lwd = 0.5)
     box()
-    axis(1,at=fun.break.axis.at,label=fun.break.axis.labels)
-    axis.break(1,fun.break.pos,style="zigzag")
+    axis(1, at = fun.break.axis.at, label = fun.break.axis.labels)
+    plotrix::axis.break(1, fun.break.pos, style = "zigzag")
   } else {
     ## plot, break, FALSE ----
-    if(boo_log10_x == TRUE) {
+    if (fun.xlog == TRUE) {
       ## plot, log10----
       plot(fun.DF$Estimate.P~sort(fun.DF$Value)
-           , ylim=c(0,101)
-           #, xlim=c(fun.xlim.x,1.01*(fun.xlim.y))
-           , type="l", col=col.data, lwd=lwd.data, lty=lty.data
-           , main=fun.Main, xlab=fun.xlab, ylab=fun.ylab, axes=FALSE
+           , ylim = c(0,101)
+           #, xlim = c(fun.xlim.x, 1.01 * (fun.xlim.y))
+           , type = "l"
+           , col = col.data
+           , lwd = lwd.data
+           , lty = lty.data
+           , main = fun.Main
+           , xlab = fun.xlab
+           , ylab = fun.ylab
+           , axes = FALSE
            , log = "x")
       ### Axis 1 (bottom) ----
       # idea
@@ -190,14 +202,20 @@ plot_cdf_fishtissue <- function(fun.DF
     } else {
       # plot, base ----
       plot(fun.DF$Estimate.P~sort(fun.DF$Value)
-           , ylim=c(0,101)
-           , xlim=c(fun.xlim.x,1.01*(fun.xlim.y))
-           , type="l", col=col.data, lwd=lwd.data, lty=lty.data
-           , main=fun.Main, xlab=fun.xlab, ylab=fun.ylab, axes=FALSE)
+           , ylim = c(0,101)
+           , xlim = c(fun.xlim.x,1.01 * (fun.xlim.y))
+           , type = "l"
+           , col = col.data
+           , lwd = lwd.data
+           , lty = lty.data
+           , main = fun.Main
+           , xlab = fun.xlab
+           , ylab = fun.ylab
+           , axes = FALSE)
       ### Axis 1 (bottom) ----
       axis(1)
     }## IF ~ boo_log10_x ~ 2
-    grid(col="lightgray",lty="dotted",lwd=0.5)
+    grid(col = "lightgray", lty = "dotted", lwd = 0.5)
     box()
   }##IF.fun.break.boo.START
 
@@ -223,20 +241,26 @@ plot_cdf_fishtissue <- function(fun.DF
   # Axis 2 (left) ----
   axis(2)
   # Add minor tickmarks (1 = no tick, ratio = compared to major ticks)
-  Hmisc::minor.tick(nx=1,ny=4,tick.ratio=0.33)
+  Hmisc::minor.tick(nx = 1, ny = 4, tick.ratio = 0.33)
 
   # Axis 4 (right) ----
-  axis(4,at=fun.axis.4.at,labels=fun.axis.4.labels)
+  axis(4, at = fun.axis.4.at, labels = fun.axis.4.labels)
 
   # 95% confidence intervals ----
-  lines(fun.DF$UCB95Pct.P~sort(fun.DF$Value),col=col.CI,lty=lty.CI,lwd=lwd.CI)
-  lines(fun.DF$LCB95Pct.P~sort(fun.DF$Value),col=col.CI,lty=lty.CI,lwd=lwd.CI)
+  lines(fun.DF$UCB95Pct.P ~ sort(fun.DF$Value)
+        , col = col.CI
+        , lty = lty.CI
+        , lwd = lwd.CI)
+  lines(fun.DF$LCB95Pct.P ~ sort(fun.DF$Value)
+        , col = col.CI
+        , lty = lty.CI
+        , lwd = lwd.CI)
 
   # Screening Value Lines (vertical & horizontal) ----
   mySV.num <- 0
   #seg.x0 defined under log10_x
   # SV1 - 20110713, add back in, only plot if "fun.SV.plot=TRUE".
-  if(fun.SV.plot == TRUE) { ## IF.START
+  if (fun.SV.plot == TRUE) { ## IF.START
     mySV.num <- 1
     segments(SV.val.seg
              , seg.v.y0
@@ -254,7 +278,7 @@ plot_cdf_fishtissue <- function(fun.DF
              , lty = lty.SV)
   } ## IF.END
   # SV2 - 20161004, extra SV plot
-  if(SV2.plot==TRUE) { ## IF.START
+  if (fun.SV2.plot == TRUE) { ## IF.START
     mySV.num <- 2
     segments(SV2.val.seg
              , seg.v.y0
@@ -272,7 +296,7 @@ plot_cdf_fishtissue <- function(fun.DF
              , lty = lty.SV)
   } ## IF.END
   # SV3 - 20161006, extra SV plot
-  if(SV3.plot == TRUE) { ## IF.START
+  if (fun.SV3.plot == TRUE) { ## IF.START
     mySV.num <- 3
     segments(SV3.val.seg
              , seg.v.y0
@@ -290,7 +314,7 @@ plot_cdf_fishtissue <- function(fun.DF
              , lty = lty.SV)
   } ## IF.END
   # SV4 - 20161006, extra SV plot
-  if(SV4.plot == TRUE) { ## IF.START
+  if (fun.SV4.plot == TRUE) { ## IF.START
     mySV.num <- 4
     segments(SV4.val.seg
              , seg.v.y0
@@ -313,7 +337,7 @@ plot_cdf_fishtissue <- function(fun.DF
   # highest number will take priority
   # 20200401, add variable for legend text and units
 
-  if(!is.na(leg_SV_units)){
+  if (!is.na(leg_SV_units)) {
     fun.SV  <- paste0(fun.SV,  " ", leg_SV_units)
     fun.SV2 <- paste0(fun.SV2, " ", leg_SV_units)
     fun.SV3 <- paste0(fun.SV3, " ", leg_SV_units)
@@ -321,81 +345,81 @@ plot_cdf_fishtissue <- function(fun.DF
   }## IF ~ is.na(leg_SV_units) ~ END
 
   # Modify legend label
-  fun.SV.lab <- ifelse(is.na(fun.SV.lab), "", paste0(fun.SV.lab, ", "))
+  fun.SV.lab  <- ifelse(is.na(fun.SV.lab), "", paste0(fun.SV.lab, ", "))
   fun.SV2.lab <- ifelse(is.na(fun.SV2.lab), "", paste0(fun.SV2.lab, ", "))
   fun.SV3.lab <- ifelse(is.na(fun.SV3.lab), "", paste0(fun.SV3.lab, ", "))
   fun.SV4.lab <- ifelse(is.na(fun.SV4.lab), "", paste0(fun.SV4.lab, ", "))
 
 
-  if(mySV.num==1) { ##IF.START
+  if (mySV.num == 1) { ##IF.START
     legend("bottomright"
-           ,lty=c(lty.data,lty.SV,lty.CI)
-           ,lwd=c(lwd.data,lwd.SV,lwd.CI)
-           ,col=c(col.data,col.SV,col.CI)
-           ,legend=c("Fillet Concentration Data"
-                     ,paste(leg_SV_str," (", fun.SV.lab, fun.SV,")",sep="")
-                     ,"95% Confidence Intervals")
-           ,bg="white")
-  } else if (mySV.num==2) {
+           , lty = c(lty.data, lty.SV, lty.CI)
+           , lwd = c(lwd.data, lwd.SV, lwd.CI)
+           , col = c(col.data, col.SV, col.CI)
+           , legend = c("Fillet Concentration Data"
+                     , paste(leg_SV_str, " (", fun.SV.lab, fun.SV, ")", sep = "")
+                     , "95% Confidence Intervals")
+           , bg = "white")
+  } else if (mySV.num == 2) {
     legend("bottomright"
-           ,lty=c(lty.data,rep(lty.SV,mySV.num),lty.CI)
-           ,lwd=c(lwd.data,rep(lwd.SV,mySV.num),lwd.CI)
-           ,col=c(col.data,rep(col.SV,mySV.num),col.CI)
-           ,legend=c("Fillet Concentration Data"
-                     ,paste(leg_SV_str," (", fun.SV.lab, fun.SV, ")",sep="")
-                     ,paste(leg_SV_str," (", fun.SV2.lab, fun.SV2, ")",sep="")
-                     ,"95% Confidence Intervals")
-           ,bg="white")
+           , lty = c(lty.data, rep(lty.SV, mySV.num), lty.CI)
+           , lwd = c(lwd.data, rep(lwd.SV, mySV.num), lwd.CI)
+           , col = c(col.data, rep(col.SV, mySV.num), col.CI)
+           , legend = c("Fillet Concentration Data"
+                     , paste(leg_SV_str, " (", fun.SV.lab, fun.SV, ")", sep = "")
+                     , paste(leg_SV_str, " (", fun.SV2.lab, fun.SV2, ")", sep = "")
+                     , "95% Confidence Intervals")
+           , bg = "white")
 
-  } else if (mySV.num==3) {
+  } else if (mySV.num == 3) {
     legend("bottomright"
-           ,lty=c(lty.data,rep(lty.SV,mySV.num),lty.CI)
-           ,lwd=c(lwd.data,rep(lwd.SV,mySV.num),lwd.CI)
-           ,col=c(col.data,rep(col.SV,mySV.num),col.CI)
-           ,legend=c("Fillet Concentration Data"
-                     ,paste(leg_SV_str," (", fun.SV.lab, fun.SV ,")",sep="")
-                     ,paste(leg_SV_str," (", fun.SV2.lab, fun.SV2 ,")",sep="")
-                     ,paste(leg_SV_str," (", fun.SV3.lab, fun.SV3 ,")",sep="")
-                     ,"95% Confidence Intervals")
-           ,bg="white")
-  } else if (mySV.num==4) {
+           , lty = c(lty.data,rep(lty.SV, mySV.num), lty.CI)
+           , lwd = c(lwd.data,rep(lwd.SV, mySV.num), lwd.CI)
+           , col = c(col.data,rep(col.SV, mySV.num), col.CI)
+           , legend = c("Fillet Concentration Data"
+                     , paste(leg_SV_str, " (", fun.SV.lab, fun.SV, ")", sep = "")
+                     , paste(leg_SV_str, " (", fun.SV2.lab, fun.SV2, ")", sep = "")
+                     , paste(leg_SV_str, " (", fun.SV3.lab, fun.SV3, ")", sep = "")
+                     , "95% Confidence Intervals")
+           ,bg = "white")
+  } else if (mySV.num == 4) {
     legend("bottomright"
-           ,lty=c(lty.data,rep(lty.SV,mySV.num),lty.CI)
-           ,lwd=c(lwd.data,rep(lwd.SV,mySV.num),lwd.CI)
-           ,col=c(col.data,rep(col.SV,mySV.num),col.CI)
-           ,legend=c("Fillet Concentration Data"
-                     ,paste(leg_SV_str," (", fun.SV.lab, fun.SV,")",sep="")
-                     ,paste(leg_SV_str," (", fun.SV2.lab, fun.SV2,")",sep="")
-                     ,paste(leg_SV_str," (", fun.SV3.lab, fun.SV3,")",sep="")
-                     ,paste(leg_SV_str," (", fun.SV4.lab,fun.SV4,")",sep="")
-                     ,"95% Confidence Intervals")
-           ,bg="white")
+           , lty = c(lty.data,rep(lty.SV, mySV.num), lty.CI)
+           , lwd = c(lwd.data,rep(lwd.SV, mySV.num), lwd.CI)
+           , col = c(col.data,rep(col.SV, mySV.num), col.CI)
+           , legend = c("Fillet Concentration Data"
+                     , paste(leg_SV_str, " (", fun.SV.lab, fun.SV, ")", sep = "")
+                     , paste(leg_SV_str, " (", fun.SV2.lab, fun.SV2, ")", sep = "")
+                     , paste(leg_SV_str, " (", fun.SV3.lab, fun.SV3, ")", sep = "")
+                     , paste(leg_SV_str, " (", fun.SV4.lab,fun.SV4, ")", sep = "")
+                     , "95% Confidence Intervals")
+           , bg = "white")
   } else {
     legend("bottomright"
-           ,lty=c(lty.data,lty.CI)
-           ,lwd=c(lwd.data,lwd.CI)
-           ,col=c(col.data,col.CI)
-           ,legend=c("Fillet Concentration Data"
-                     ,"95% Confidence Intervals")
-           ,bg="white")
+           , lty = c(lty.data,lty.CI)
+           , lwd = c(lwd.data,lwd.CI)
+           , col = c(col.data,col.CI)
+           , legend = c("Fillet Concentration Data"
+                     , "95% Confidence Intervals")
+           , bg = "white")
   }
 
   #~~~~~~~~~~~~~~~~~~~~~~~~
   # Break Symbol ----
   # Break (after legend so goes on top)
-  if(fun.break.boo==TRUE){##IF.fun.break.boo.START
-    plotrix::axis.break(1,fun.break.pos,style="zigzag")
+  if (fun.break.boo == TRUE) {##IF.fun.break.boo.START
+    plotrix::axis.break(1, fun.break.pos, style = "zigzag")
   }
 
   # Axis 2 and 4 Titles ----
-  par(new=TRUE)
+  par(new = TRUE)
   # different title based on projet (20161004)
   mtext(fun.axis.4.mtext, side = 4, line = mtext.line, cex = mtext.cex)
   # different yaxis (20210827), when use superscript have to use mtext instead
-  if(fun.ylab == "") {
+  if (fun.ylab == "") {
     mtext(fun.axis.2.mtext, side = 2, line = mtext.line - 0.5, cex = mtext.cex)
   }## IF ~ !is.na(fun.axis.2.mtext) ~ END
   #
   # Turn off new ----
-  par(new=FALSE)
+  par(new = FALSE)
 } ## FUNCTION ~ END
