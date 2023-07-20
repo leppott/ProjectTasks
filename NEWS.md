@@ -4,9 +4,19 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-07-19 09:36:57.798383
+    #> Last Update: 2023-07-20 16:19:08.861855
 
-# ProjectTasks 0.1.0.9004 (2023-07-19)
+# ProjectTasks 0.1.0.9007 (2023-07-19)
+
+- refactor: Update upset plot function
+- feat: Add data for use with upset plot
+- refactor: Modify name of map data to better align with upset plot data
+
+# ProjectTasks 0.1.0.9006 (2023-07-19)
+
+- refactor: Update upset plot function
+
+# ProjectTasks 0.1.0.9005 (2023-07-19)
 
 - feat: Add Great Lakes map function
 - docs: Update DESCRIPTION for needed packages

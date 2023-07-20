@@ -39,11 +39,11 @@ stopifnot(nrow(df_data) == nrow(df_merge)) #QC
 #df_map_pfos <- df_merge[df_merge[, "Analyte"] == "Perfluorooctanesulfonate (PFOS)", ]
 
 # Save ----
-data_gl2010 <- df_merge
+data_gl2010_map <- df_merge
 ## as RDA for use in package
-usethis::use_data(data_gl2010, overwrite = TRUE)
+usethis::use_data(data_gl2010_map, overwrite = TRUE)
 
 
 # Document data
 ## Add to R/data.R
-promptData(data_gl2010)
+promptData(data_gl2010_map)

@@ -5,49 +5,108 @@
 \title{Plot Fish Study Upset}
 \usage{
 plot_upset_fishtissue(
-  data,
+  df_data,
   title_str = NA,
+  title_custloc = FALSE,
   title_x = 0.2,
   title_y = 0.9,
   title_fontsize = 16,
   cap_str = NA,
+  cap_custloc = FALSE,
   cap_x = 0.5,
   cap_y = 0.025,
   cap_fontsize = 8
 )
 }
 \arguments{
-\item{data}{Data as data frame (variables are 1 or 0 as columns)}
-
 \item{title_str}{Title string. Default = NA}
+
+\item{title_custloc}{Use a custom location for the title? Default = FALSE}
 
 \item{title_x}{Title x placement.  Default = 0.2}
 
-\item{title_y}{Title y placment. Default = 0.9}
+\item{title_y}{Title y placement. Default = 0.9}
 
 \item{title_fontsize}{Title font size.  Default = 16}
 
 \item{cap_str}{Caption string. Default = NA}
+
+\item{cap_custloc}{Use a custom location for the caption? Default = FALSE}
 
 \item{cap_x}{Caption x placement. Default = 0.5}
 
 \item{cap_y}{Caption y placement. Default = 0.025}
 
 \item{cap_fontsize}{Caption font size. Default = 8}
+
+\item{data}{Data as data frame (variables are 1 or 0 as columns)}
 }
 \value{
-A plot object is returned.
+A ggplot object is returned.
 }
 \description{
 Upset plot for fish study projects
 }
 \details{
-Upset plot with different options for fish tissue studies (NLA,
-NRSA, and Great Lakes).
+Upset plot using the `ComplexUpset` package.
 
-Plots use the UpSetR package.
+Upset plots show co-occurence of different variables.  The left side sizes
+plot is turned on by default.  This creates extra area in the upper left
+that can be used for an alternative location for the plot title.  The
+function is set up to use the basic title as default but has input parameters
+to change the location (e.g., upper left).
 
-Saves plots to a user defined folder.
+A ggplot object is returned that the user can further modify and save.
+#'
+# 2023-07-20, moved code to package scripts.
+Derived for Great Lakes studies.
+}
+\examples{
+# Data
+df_data <- data_gl2010_upset
 
-# 20230413, moved code to package scripts.  Derived for Great Lakes studies.
+# Parameters ----
+namedata <- "Great Lakes, 2010"
+fishconsumer <- "general"
+sv_hg <- 300
+sv_pfas <- 0.52
+sv_pcb <- 12
+
+# Plot Parts ----
+title_str <- paste0(namedata
+                    , "\n(n = ", nrow(df_data), ")"
+                    , "\nExceeds Screening Value")
+cap_str <- paste0("Screening Values for "
+                  , fishconsumer
+                  , " fish consumer; "
+                  , "Mercury = "
+                  , sv_hg
+                  , ", "
+                  , "PFAS = "
+                  , sv_pfas
+                  , ", "
+                  , "Total PCBs = "
+                  , sv_pcb
+                  )
+
+# Plot, title and caption, base location ----
+p1 <- plot_upset_fishtissue(df_data = df_data
+                           , title_str = title_str
+                           , cap_str = cap_str)
+p1
+
+# Plot, title and caption, custom location ----
+p2 <- plot_upset_fishtissue(df_data = df_data
+                           , title_str = title_str
+                           , title_custloc = TRUE
+                           , title_x = 0.16
+                           , title_y = 0.90
+                           , title_fontsize = 16
+                           , cap_str = cap_str
+                           , cap_custloc = TRUE
+                           , cap_x = 0.5
+                           , cap_y = 0.025
+                           , cap_fontsize = 8)
+p2
+
 }

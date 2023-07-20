@@ -1,8 +1,10 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# data_gl2010 ####
-#' @title Great Lakes 2010
+# data_gl2010_map ####
+#' @title Great Lakes 2010 PFAS Map Data
 #'
 #' @description Fish tissue data from Great Lakes 2010 survey.
+#' Formatted for use with map function.
+#' Analytes include PFAS only.
 #' Data set is dated 2021-04-26.
 #'
 #' @format A data frame with 2041 observations on the following 32 variables.
@@ -40,5 +42,24 @@
 #'    \item{\code{Latitude}}{a numeric vector}
 #'    \item{\code{Longitude}}{a numeric vector}
 #' }
-"data_gl2010"
+"data_gl2010_map"
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# data_gl2010_upset ####
+#' @title Great Lakes 2010 Multiple Analyte Upset Plot Data
+#'
+#' @description Fish tissue data from Great Lakes 2010 survey.
+#' Formatted for use with update plot function.
+#' Analytes include mercury, PFAS, and total PCBs.
+#' Exceedance occurrence using screening values (ppb), respectively, 300, 0.52
+#' , and 12.
+#' Data set is dated 2021-04-26.
+#'
+#' @format A data frame with 157 observations on the following 4 variables.
+#' \describe{
+#'    \item{\code{EPA.Sample.ID}}{a character vector}
+#'    \item{\code{Mercury}}{a numeric vector}
+#'    \item{\code{Perfluorooctanesulfonate..PFOS.}}{a numeric vector}
+#'    \item{\code{Total.PCBs}}{a numeric vector}
+#' }
+"data_gl2010_map"
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

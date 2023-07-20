@@ -48,7 +48,7 @@ than the screening value (non-exceedances).
 }
 \examples{
 
-data <- data_gl2010
+data <- data_gl2010_map
 sv <- 40
 xlong <- "Longitude"
 ylat <- "Latitude"
