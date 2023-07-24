@@ -4,7 +4,7 @@
 #'
 #' @details Upset plot using the `ComplexUpset` package.
 #'
-#' Upset plots show co-occurence of different variables.  The left side sizes
+#' Upset plots show co-occurrence of different variables.  The left side sizes
 #' plot is turned on by default.  This creates extra area in the upper left
 #' that can be used for an alternative location for the plot title.  The
 #' function is set up to use the basic title as default but has input parameters
@@ -26,6 +26,7 @@
 #' @param cap_x Caption x placement. Default = 0.5
 #' @param cap_y Caption y placement. Default = 0.025
 #' @param cap_fontsize Caption font size. Default = 8
+#' @param ... Arguments to be passed on to ComplexUpset::upset
 #'
 #' @return A ggplot object is returned.
 #'
@@ -89,7 +90,7 @@ plot_upset_fishtissue <- function(df_data
                                 , cap_x = 0.5
                                 , cap_y = 0.025
                                 , cap_fontsize = 8
-                                ) {
+                                , ...) {
 
   # UpSetR
   # https://upset.app/
@@ -144,7 +145,8 @@ plot_upset_fishtissue <- function(df_data
                                         , hjust = 1.1
                                         , stat = 'count')
                               + ggplot2::expand_limits(y = nrow(df_data) * 1.15)
-                        ))
+                                      )
+                        , ...)
     #### Title ----
     if (title_custloc == TRUE) {
       p <- p +

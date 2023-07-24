@@ -4,7 +4,11 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-07-20 16:19:08.861855
+    #> Last Update: 2023-07-24 12:52:09.763248
+
+# ProjectTasks 0.1.0.9008 (2023-07-24)
+
+- refactor: Add pass through parameter (…) to upset plot function
 
 # ProjectTasks 0.1.0.9007 (2023-07-19)
 

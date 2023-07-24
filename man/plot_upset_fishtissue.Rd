@@ -15,7 +15,8 @@ plot_upset_fishtissue(
   cap_custloc = FALSE,
   cap_x = 0.5,
   cap_y = 0.025,
-  cap_fontsize = 8
+  cap_fontsize = 8,
+  ...
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ plot_upset_fishtissue(
 
 \item{cap_fontsize}{Caption font size. Default = 8}
 
+\item{...}{Arguments to be passed on to ComplexUpset::upset}
+
 \item{data}{Data as data frame (variables are 1 or 0 as columns)}
 }
 \value{
@@ -50,7 +53,7 @@ Upset plot for fish study projects
 \details{
 Upset plot using the `ComplexUpset` package.
 
-Upset plots show co-occurence of different variables.  The left side sizes
+Upset plots show co-occurrence of different variables.  The left side sizes
 plot is turned on by default.  This creates extra area in the upper left
 that can be used for an alternative location for the plot title.  The
 function is set up to use the basic title as default but has input parameters
