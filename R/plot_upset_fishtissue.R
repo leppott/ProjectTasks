@@ -15,7 +15,9 @@
 #' # 2023-07-20, moved code to package scripts.
 #' Derived for Great Lakes studies.
 #'
-#' @param data Data as data frame (variables are 1 or 0 as columns)
+#' @param data Data as data frame (variables are 1 or 0 as columns).
+#' @param intersect Columns to be used to compose the intersection.
+#' Default = names(data)[-1]
 #' @param title_str Title string. Default = NA
 #' @param title_custloc Use a custom location for the title? Default = FALSE
 #' @param title_x Title x placement.  Default = 0.2
@@ -80,17 +82,18 @@
 #'
 #' @export
 plot_upset_fishtissue <- function(df_data
-                                , title_str = NA
-                                , title_custloc = FALSE
-                                , title_x = 0.2
-                                , title_y = 0.9
-                                , title_fontsize = 16
-                                , cap_str = NA
-                                , cap_custloc = FALSE
-                                , cap_x = 0.5
-                                , cap_y = 0.025
-                                , cap_fontsize = 8
-                                , ...) {
+                                  , intersect = names(df_data)[-1]
+                                  , title_str = NA
+                                  , title_custloc = FALSE
+                                  , title_x = 0.2
+                                  , title_y = 0.9
+                                  , title_fontsize = 16
+                                  , cap_str = NA
+                                  , cap_custloc = FALSE
+                                  , cap_x = 0.5
+                                  , cap_y = 0.025
+                                  , cap_fontsize = 8
+                                  , ...) {
 
   # UpSetR
   # https://upset.app/
@@ -138,7 +141,7 @@ plot_upset_fishtissue <- function(df_data
     ## ComplexUpset----
     ### Plot ----
     p <- ComplexUpset::upset(df_data
-                        , intersect = names(df_data)[-1]
+                        , intersect = intersect
                         , set_sizes = (ComplexUpset::upset_set_size() +
                               ggplot2::geom_text(ggplot2::aes(label =
                                                     ggplot2::after_stat(count))

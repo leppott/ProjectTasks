@@ -16,6 +16,9 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.path = "NEWS-")
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+# ProjectTasks 0.1.0.9009 (2023-07-25)
+* refactor: Add intersect parameter to upset plot function
+
 # ProjectTasks 0.1.0.9008 (2023-07-24)
 * refactor: Add pass through parameter (...) to upset plot function
 

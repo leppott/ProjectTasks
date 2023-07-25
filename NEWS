@@ -4,7 +4,11 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-07-24 12:52:09.763248
+    #> Last Update: 2023-07-25 13:40:27.991493
+
+# ProjectTasks 0.1.0.9009 (2023-07-25)
+
+- refactor: Add intersect parameter to upset plot function
 
 # ProjectTasks 0.1.0.9008 (2023-07-24)
 

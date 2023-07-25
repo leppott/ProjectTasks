@@ -6,6 +6,7 @@
 \usage{
 plot_upset_fishtissue(
   df_data,
+  intersect = names(df_data)[-1],
   title_str = NA,
   title_custloc = FALSE,
   title_x = 0.2,
@@ -20,6 +21,9 @@ plot_upset_fishtissue(
 )
 }
 \arguments{
+\item{intersect}{Columns to be used to compose the intersection.
+Default = names(data)[-1]}
+
 \item{title_str}{Title string. Default = NA}
 
 \item{title_custloc}{Use a custom location for the title? Default = FALSE}
@@ -42,7 +46,7 @@ plot_upset_fishtissue(
 
 \item{...}{Arguments to be passed on to ComplexUpset::upset}
 
-\item{data}{Data as data frame (variables are 1 or 0 as columns)}
+\item{data}{Data as data frame (variables are 1 or 0 as columns).}
 }
 \value{
 A ggplot object is returned.
