@@ -11,6 +11,11 @@
 #'
 #' uses the Hmisc and plotrix packages
 #'
+#' BREAKING CHANGE
+#' 2023-10-04
+#' Added 5th Screening Value
+#' If didn't specify parameters and assumed an order will break code
+#'
 #' # CDF plotting function for Fish Tissue project
 #' # 20161005, Erik.Leppo@tetratech.com
 #' # move function to its own script
@@ -48,6 +53,10 @@
 #' @param fun.SV4 Screening Value 4, numeric value
 #' @param fun.SV4.int Screening Value 4, y-intercept value
 #' @param fun.SV4.lab Screening Value 4, legend (source)
+#' @param fun.SV5.plot Screening Value 4, boolean value to plot SV
+#' @param fun.SV5 Screening Value 4, numeric value
+#' @param fun.SV5.int Screening Value 4, y-intercept value
+#' @param fun.SV5.lab Screening Value 4, legend (source)
 #' @param fun.break.boo Should x-axis include a break. Default = FALSE
 #' @param fun.break.max.at . Default = NA
 #' @param fun.break.pos location of break. Default = NA
@@ -58,9 +67,10 @@
 #' @param fun.axis.2.mtext axis 2 (left) margin text label. Default = NA
 #' @param fun.xlog Boolean value if x-axis should be log10 transformed.  Default = FALSE
 #'
-#' @return
+#' @return CDF plot customized for Fish Tissue project.
 #'
 #' @examples
+#' # non at this time
 #'
 #' @export
 plot_cdf_fishtissue <- function(fun.DF
@@ -88,6 +98,10 @@ plot_cdf_fishtissue <- function(fun.DF
                                 , fun.SV4
                                 , fun.SV4.int
                                 , fun.SV4.lab
+                                , fun.SV5.plot
+                                , fun.SV5
+                                , fun.SV5.int
+                                , fun.SV5.lab
                                 , fun.break.boo = FALSE
                                 , fun.break.max.at = NA
                                 , fun.break.max.text = NA
@@ -146,12 +160,14 @@ plot_cdf_fishtissue <- function(fun.DF
   SV2.val.seg <- fun.SV2
   SV3.val.seg <- fun.SV3
   SV4.val.seg <- fun.SV4
+  SV5.val.seg <- fun.SV5
 
   # Legend SV value
   SV.val.leg <- fun.SV
   SV2.val.leg <- fun.SV2
   SV3.val.leg <- fun.SV3
-  SV4.val.leg <- fun.SV4
+  SV4.val.seg <- fun.SV4
+  SV5.val.seg <- fun.SV5
 
 
   # Plot ----
@@ -331,6 +347,24 @@ plot_cdf_fishtissue <- function(fun.DF
              , lwd = lwd.SV
              , lty = lty.SV)
   } ## IF.END
+  # SV5 - 20231004, extra SV plot
+  if (fun.SV5.plot == TRUE) {
+    mySV.num <- 5
+    segments(SV5.val.seg
+             , seg.v.y0
+             , SV5.val.seg
+             , fun.SV5.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+    segments(seg.h.x0
+             , fun.SV5.int
+             , SV5.val.seg
+             , fun.SV5.int
+             , col = col.SV
+             , lwd = lwd.SV
+             , lty = lty.SV)
+  } ## IF.END
   #
   # Legend ----
   # (EWL, 20120830, added SV legend back (inside of SV IF/THEN)
@@ -342,6 +376,7 @@ plot_cdf_fishtissue <- function(fun.DF
     fun.SV2 <- paste0(fun.SV2, " ", leg_SV_units)
     fun.SV3 <- paste0(fun.SV3, " ", leg_SV_units)
     fun.SV4 <- paste0(fun.SV4, " ", leg_SV_units)
+    fun.SV5 <- paste0(fun.SV5, " ", leg_SV_units)
   }## IF ~ is.na(leg_SV_units) ~ END
 
   # Modify legend label
@@ -349,6 +384,7 @@ plot_cdf_fishtissue <- function(fun.DF
   fun.SV2.lab <- ifelse(is.na(fun.SV2.lab), "", paste0(fun.SV2.lab, ", "))
   fun.SV3.lab <- ifelse(is.na(fun.SV3.lab), "", paste0(fun.SV3.lab, ", "))
   fun.SV4.lab <- ifelse(is.na(fun.SV4.lab), "", paste0(fun.SV4.lab, ", "))
+  fun.SV5.lab <- ifelse(is.na(fun.SV5.lab), "", paste0(fun.SV5.lab, ", "))
 
 
   if (mySV.num == 1) { ##IF.START
@@ -391,8 +427,21 @@ plot_cdf_fishtissue <- function(fun.DF
                      , paste(leg_SV_str, " (", fun.SV.lab, fun.SV, ")", sep = "")
                      , paste(leg_SV_str, " (", fun.SV2.lab, fun.SV2, ")", sep = "")
                      , paste(leg_SV_str, " (", fun.SV3.lab, fun.SV3, ")", sep = "")
-                     , paste(leg_SV_str, " (", fun.SV4.lab,fun.SV4, ")", sep = "")
+                     , paste(leg_SV_str, " (", fun.SV4.lab, fun.SV4, ")", sep = "")
                      , "95% Confidence Intervals")
+           , bg = "white")
+  } else if (mySV.num == 5) {
+    legend("bottomright"
+           , lty = c(lty.data,rep(lty.SV, mySV.num), lty.CI)
+           , lwd = c(lwd.data,rep(lwd.SV, mySV.num), lwd.CI)
+           , col = c(col.data,rep(col.SV, mySV.num), col.CI)
+           , legend = c("Fillet Concentration Data"
+                        , paste(leg_SV_str, " (", fun.SV.lab, fun.SV, ")", sep = "")
+                        , paste(leg_SV_str, " (", fun.SV2.lab, fun.SV2, ")", sep = "")
+                        , paste(leg_SV_str, " (", fun.SV3.lab, fun.SV3, ")", sep = "")
+                        , paste(leg_SV_str, " (", fun.SV4.lab, fun.SV4, ")", sep = "")
+                        , paste(leg_SV_str, " (", fun.SV5.lab, fun.SV5, ")", sep = "")
+                        , "95% Confidence Intervals")
            , bg = "white")
   } else {
     legend("bottomright"

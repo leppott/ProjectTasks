@@ -16,6 +16,11 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.path = "NEWS-")
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+# ProjectTasks 0.2.0.9001 (2023-10-04)
+
+* break: Added 5th screening value
+    + If didn't specify parameters and assumed an order will break code
+
 # ProjectTasks 0.1.0.9009 (2023-07-25)
 * refactor: Add intersect parameter to upset plot function
 

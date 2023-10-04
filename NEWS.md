@@ -4,7 +4,12 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-07-25 13:40:27.991493
+    #> Last Update: 2023-10-04 18:05:40.807631
+
+# ProjectTasks 0.2.0.9001 (2023-10-04)
+
+- break: Added 5th screening value
+  - If didn’t specify parameters and assumed an order will break code
 
 # ProjectTasks 0.1.0.9009 (2023-07-25)
 

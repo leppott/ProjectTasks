@@ -30,6 +30,10 @@ plot_cdf_fishtissue(
   fun.SV4,
   fun.SV4.int,
   fun.SV4.lab,
+  fun.SV5.plot,
+  fun.SV5,
+  fun.SV5.int,
+  fun.SV5.lab,
   fun.break.boo = FALSE,
   fun.break.max.at = NA,
   fun.break.max.text = NA,
@@ -93,6 +97,14 @@ plot_cdf_fishtissue(
 
 \item{fun.SV4.lab}{Screening Value 4, legend (source)}
 
+\item{fun.SV5.plot}{Screening Value 4, boolean value to plot SV}
+
+\item{fun.SV5}{Screening Value 4, numeric value}
+
+\item{fun.SV5.int}{Screening Value 4, y-intercept value}
+
+\item{fun.SV5.lab}{Screening Value 4, legend (source)}
+
 \item{fun.break.boo}{Should x-axis include a break. Default = FALSE}
 
 \item{fun.break.max.at}{. Default = NA}
@@ -111,6 +123,9 @@ plot_cdf_fishtissue(
 
 \item{fun.xlog}{Boolean value if x-axis should be log10 transformed.  Default = FALSE}
 }
+\value{
+CDF plot customized for Fish Tissue project.
+}
 \description{
 CDF for fish study projects
 }
@@ -124,6 +139,11 @@ Saves plots to a user defined folder.
 
 uses the Hmisc and plotrix packages
 
+BREAKING CHANGE
+2023-10-04
+Added 5th Screening Value
+If didn't specify parameters and assumed an order will break code
+
 # CDF plotting function for Fish Tissue project
 # 20161005, Erik.Leppo@tetratech.com
 # move function to its own script
@@ -135,4 +155,8 @@ uses the Hmisc and plotrix packages
 # 20220414, move to package scripts, was fun.plot.CDF.fish
 
 # Derived from NRSA version (more advanced with Log scale than GL version)
+}
+\examples{
+# non at this time
+
 }
