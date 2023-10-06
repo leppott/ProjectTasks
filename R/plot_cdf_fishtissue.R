@@ -25,7 +25,9 @@
 #' # 20210826, Add legend label update
 #' # 20220322, Legend, "Data" to "Fillet Concentration Data"
 #' # 20220414, move to package scripts, was fun.plot.CDF.fish
-#' # 20231006, increase SV thickness 1.5 to 2 and color green to darkgreen
+#' # 20231006
+#' ## increase SV thickness 1.5 to 2 and color green to darkgreen
+#' ## trigger for SV annotations in legend
 #'
 #' # Derived from NRSA version (more advanced with Log scale than GL version)
 #'
@@ -65,6 +67,8 @@
 #' @param fun.break.axis.labels new x-axis labels with break
 #' @param leg_SV_str Legend screening value, SV text.  Default = "Screening Value"
 #' @param leg_SV_units Legend screening value, units.  Default = NA
+#' @param leg_SV_verbose Boolean to include SV in the legend with or without
+#' lab, units, and SV value.  Default = TRUE (FALSE will be leg_SV_str only)
 #' @param fun.axis.2.mtext axis 2 (left) margin text label. Default = NA
 #' @param fun.xlog Boolean value if x-axis should be log10 transformed.  Default = FALSE
 #'
@@ -111,6 +115,7 @@ plot_cdf_fishtissue <- function(fun.DF
                                 , fun.break.axis.labels = NA
                                 , leg_SV_str = "Screening Value"
                                 , leg_SV_units = NA
+                                , leg_SV_verbose = TRUE
                                 , fun.axis.2.mtext = NA
                                 , fun.xlog = FALSE
                                 ) {
@@ -387,8 +392,16 @@ plot_cdf_fishtissue <- function(fun.DF
   fun.SV4.lab <- ifelse(is.na(fun.SV4.lab), "", paste0(fun.SV4.lab, ", "))
   fun.SV5.lab <- ifelse(is.na(fun.SV5.lab), "", paste0(fun.SV5.lab, ", "))
 
-
-  if (mySV.num == 1) { ##IF.START
+  if (leg_SV_verbose == FALSE) {
+    legend("bottomright"
+           , lty = c(lty.data, lty.SV, lty.CI)
+           , lwd = c(lwd.data, lwd.SV, lwd.CI)
+           , col = c(col.data, col.SV, col.CI)
+           , legend = c("Fillet Concentration Data"
+                        , leg_SV_str
+                        , "95% Confidence Intervals")
+           , bg = "white")
+  } else if (mySV.num == 1) { ##IF.START
     legend("bottomright"
            , lty = c(lty.data, lty.SV, lty.CI)
            , lwd = c(lwd.data, lwd.SV, lwd.CI)

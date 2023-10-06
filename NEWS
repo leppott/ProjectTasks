@@ -4,7 +4,12 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-10-06 08:28:16.222511
+    #> Last Update: 2023-10-06 13:18:37.938269
+
+# ProjectTasks 0.2.0.9003 (2023-10-06)
+
+- break: Added boolean for explicit screening values in legend
+  - If didn’t specify parameters and assumed an order will break code
 
 # ProjectTasks 0.2.0.9002 (2023-10-06)
 

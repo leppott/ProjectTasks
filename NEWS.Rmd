@@ -16,6 +16,11 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.path = "NEWS-")
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+# ProjectTasks 0.2.0.9003 (2023-10-06)
+
+* break: Added boolean for explicit screening values in legend
+    + If didn't specify parameters and assumed an order will break code
+
 # ProjectTasks 0.2.0.9002 (2023-10-06)
 
 * refactor: CDF plots change SV thickness and color

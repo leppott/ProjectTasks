@@ -42,6 +42,7 @@ plot_cdf_fishtissue(
   fun.break.axis.labels = NA,
   leg_SV_str = "Screening Value",
   leg_SV_units = NA,
+  leg_SV_verbose = TRUE,
   fun.axis.2.mtext = NA,
   fun.xlog = FALSE
 )
@@ -119,6 +120,9 @@ plot_cdf_fishtissue(
 
 \item{leg_SV_units}{Legend screening value, units.  Default = NA}
 
+\item{leg_SV_verbose}{Boolean to include SV in the legend with or without
+lab, units, and SV value.  Default = TRUE (FALSE will be leg_SV_str only)}
+
 \item{fun.axis.2.mtext}{axis 2 (left) margin text label. Default = NA}
 
 \item{fun.xlog}{Boolean value if x-axis should be log10 transformed.  Default = FALSE}
@@ -153,7 +157,9 @@ If didn't specify parameters and assumed an order will break code
 # 20210826, Add legend label update
 # 20220322, Legend, "Data" to "Fillet Concentration Data"
 # 20220414, move to package scripts, was fun.plot.CDF.fish
-# 20231006, increase SV thickness 1.5 to 2 and color green to darkgreen
+# 20231006
+## increase SV thickness 1.5 to 2 and color green to darkgreen
+## trigger for SV annotations in legend
 
 # Derived from NRSA version (more advanced with Log scale than GL version)
 }

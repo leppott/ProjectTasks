@@ -1,7 +1,7 @@
 Package: ProjectTasks
 Type: Package
 Title: Project Plots and Tables
-Version: 0.2.0.9002
+Version: 0.2.0.9003
 Author: person("Erik W.", "Leppo", email="Erik.Leppo@tetratech.com", role=c("aut","cre"))
 Maintainer: Erik W. Leppo <Erik.Leppo@tetratech.com>
 Description: Package to maintain scripts for generating plots and tables across 
