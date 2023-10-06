@@ -153,6 +153,7 @@ If didn't specify parameters and assumed an order will break code
 # 20210826, Add legend label update
 # 20220322, Legend, "Data" to "Fillet Concentration Data"
 # 20220414, move to package scripts, was fun.plot.CDF.fish
+# 20231006, increase SV thickness 1.5 to 2 and color green to darkgreen
 
 # Derived from NRSA version (more advanced with Log scale than GL version)
 }

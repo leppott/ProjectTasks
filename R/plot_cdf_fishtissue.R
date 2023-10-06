@@ -25,6 +25,7 @@
 #' # 20210826, Add legend label update
 #' # 20220322, Legend, "Data" to "Fillet Concentration Data"
 #' # 20220414, move to package scripts, was fun.plot.CDF.fish
+#' # 20231006, increase SV thickness 1.5 to 2 and color green to darkgreen
 #'
 #' # Derived from NRSA version (more advanced with Log scale than GL version)
 #'
@@ -116,10 +117,10 @@ plot_cdf_fishtissue <- function(fun.DF
   #browser()
   # define some values ----
   lwd.data <- 2.5
-  lwd.SV <- 1.5
-  lwd.CI <- lwd.SV
+  lwd.SV <- 2 # 1.5
+  lwd.CI <- 1.5 #lwd.SV
   col.data <- "blue"
-  col.SV <- "green"
+  col.SV <- "darkgreen" # "green"
   col.CI <- "dark red"
   lty.data <- "solid"
   lty.SV <- "dashed"

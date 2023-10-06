@@ -4,7 +4,11 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-10-04 18:05:40.807631
+    #> Last Update: 2023-10-06 08:28:16.222511
+
+# ProjectTasks 0.2.0.9002 (2023-10-06)
+
+- refactor: CDF plots change SV thickness and color
 
 # ProjectTasks 0.2.0.9001 (2023-10-04)
 
